@@ -35,7 +35,9 @@ header nav[aria-expanded='true'] {
     display: flex;
     justify-content: space-between;
     gap: 0 32px;
-    max-width: 1264px;
+    width: 100%;
+    max-width: 1600px;
+    margin: auto;
     padding: 0 32px;
   }
 
@@ -145,8 +147,8 @@ header .nav-brand {
 }
 
 header nav .nav-brand img {
-  width: 128px;
-  height: auto;
+  width: 72px;
+  height: 55px;
 }
 
 /* sections */
@@ -222,6 +224,7 @@ header nav .nav-sections ul > li > ul > li {
     display: flex;
     gap: 24px;
     margin: 0;
+    justify-content: center;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li {
@@ -265,4 +268,14 @@ header nav .nav-sections ul > li > ul > li {
 /* tools */
 header nav .nav-tools {
   grid-area: tools;
+}
+
+header nav .nav-tools .default-content-wrapper > p {
+  display: flex;
+  gap: 8px;
+}
+
+header nav .icon.icon-search {
+  width: 20px;
+  height: 20px;
 }

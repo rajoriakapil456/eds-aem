@@ -18,6 +18,8 @@
   --background-color: #fff;
   --overlay-background-color: #eee;
   --highlight-background-color: #ccc;
+  --border-color: #cbd1d6;
+  --light-color: #f5f7f8;
 
   /* fonts */
   --heading-font-family: "PwC ITC Charter", georgia, serif;

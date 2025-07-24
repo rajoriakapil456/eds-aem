@@ -25,3 +25,20 @@
   aspect-ratio: 4 / 3;
   object-fit: cover;
 }
+
+.cards-card-body a {
+  font-weight: bold;
+  font-size: 1.75rem;
+}
+
+.cards-card-body a:hover {
+  text-underline-offset: 7px;
+}
+
+.cards ul li {
+  background-color: var(--light-color);
+}
+
+.cards ul li:hover {
+  background-color: var(--grey200);
+}

@@ -12,9 +12,9 @@
   background-color: var(--background-color);
 }
 
-.cards .cards-card-body {
+/* .cards .cards-card-body {
   margin: 16px;
-}
+} */
 
 .cards .cards-card-image {
   line-height: 0;
@@ -41,4 +41,12 @@
 
 .cards ul li:hover {
   background-color: var(--grey200);
+}
+
+.cards .cards-card-body {
+  padding: 42px 40px;
+}
+
+.cards .cards-card-body p {
+  margin: 0;
 }

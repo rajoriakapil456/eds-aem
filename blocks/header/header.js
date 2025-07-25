@@ -104,17 +104,6 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   }
 }
 
-function getDirectTextContent(menuItem) {
-  const menuLink = menuItem.querySelector(':scope > a');
-  if (menuLink) {
-    return menuLink.textContent.trim();
-  }
-  return Array.from(menuItem.childNodes)
-    .filter((n) => n.nodeType === Node.TEXT_NODE)
-    .map((n) => n.textContent)
-    .join(' ');
-}
-
 async function buildBreadcrumbsFromNavTree(nav, currentUrl) {
   const crumbs = [];
 
@@ -134,7 +123,7 @@ async function buildBreadcrumbsFromNavTree(nav, currentUrl) {
   const segments = urlObj.pathname.split('/').filter(Boolean);
 
   let cumulativePath = urlObj.origin;
-  for (let i = 0; i < segments.length - 1; i++) {
+  for (let i = 0; i < segments.length - 1; i += 1) {
     cumulativePath += `/${segments[i]}`;
     crumbs.push({ title: decodeURIComponent(segments[i]), url: `${cumulativePath}/` });
   }

@@ -118,7 +118,6 @@ function getDirectTextContent(menuItem) {
 async function buildBreadcrumbsFromNavTree(nav, currentUrl) {
   const crumbs = [];
 
-  // Derive homeUrl from current URL (e.g., https://main--site.aem.page/)
   const urlObj = new URL(currentUrl);
   const homeUrl = `${urlObj.origin}/`;
 
@@ -130,27 +129,21 @@ async function buildBreadcrumbsFromNavTree(nav, currentUrl) {
     return crumbs;
   }
 
-  let menuItem = Array.from(nav.querySelectorAll('a')).find((a) => a.href === currentUrl);
-  if (menuItem) {
-    do {
-      const link = menuItem.querySelector(':scope > a');
-      crumbs.unshift({ title: getDirectTextContent(menuItem), url: link ? link.href : null });
-      menuItem = menuItem.closest('ul')?.closest('li');
-    } while (menuItem);
-  } else {
-    crumbs.unshift({ title: getMetadata('og:title'), url: currentUrl });
+  crumbs.push({ title: homePlaceholder, url: homeUrl });
+
+  const segments = urlObj.pathname.split('/').filter(Boolean);
+
+  let cumulativePath = urlObj.origin;
+  for (let i = 0; i < segments.length - 1; i++) {
+    cumulativePath += `/${segments[i]}`;
+    crumbs.push({ title: decodeURIComponent(segments[i]), url: `${cumulativePath}/` });
   }
 
-  crumbs.unshift({ title: homePlaceholder, url: homeUrl });
-
-  if (crumbs.length > 1) {
-    crumbs[crumbs.length - 1].url = null;
-  }
-  crumbs[crumbs.length - 1]['aria-current'] = 'page';
+  const pageTitle = getMetadata('og:title') || decodeURIComponent(segments[segments.length - 1] || '');
+  crumbs.push({ title: pageTitle, url: null, 'aria-current': 'page' });
 
   return crumbs;
 }
-
 
 async function buildBreadcrumbs() {
   const breadcrumbs = document.createElement('nav');

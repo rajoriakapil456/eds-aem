@@ -122,6 +122,14 @@ async function buildBreadcrumbsFromNavTree(nav, currentUrl) {
   const urlObj = new URL(currentUrl);
   const homeUrl = `${urlObj.origin}/`;
 
+  const placeholders = await fetchPlaceholders();
+  const homePlaceholder = placeholders.breadcrumbsHomeLabel || 'Home';
+
+  if (currentUrl === homeUrl) {
+    crumbs.push({ title: homePlaceholder, url: null, 'aria-current': 'page' });
+    return crumbs;
+  }
+
   let menuItem = Array.from(nav.querySelectorAll('a')).find((a) => a.href === currentUrl);
   if (menuItem) {
     do {
@@ -129,22 +137,20 @@ async function buildBreadcrumbsFromNavTree(nav, currentUrl) {
       crumbs.unshift({ title: getDirectTextContent(menuItem), url: link ? link.href : null });
       menuItem = menuItem.closest('ul')?.closest('li');
     } while (menuItem);
-  } else if (currentUrl !== homeUrl) {
+  } else {
     crumbs.unshift({ title: getMetadata('og:title'), url: currentUrl });
   }
 
-  const placeholders = await fetchPlaceholders();
-  const homePlaceholder = placeholders.breadcrumbsHomeLabel || 'Home';
-
   crumbs.unshift({ title: homePlaceholder, url: homeUrl });
 
-  // last link is current page and should not be linked
   if (crumbs.length > 1) {
     crumbs[crumbs.length - 1].url = null;
   }
   crumbs[crumbs.length - 1]['aria-current'] = 'page';
+
   return crumbs;
 }
+
 
 async function buildBreadcrumbs() {
   const breadcrumbs = document.createElement('nav');

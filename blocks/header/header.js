@@ -118,9 +118,7 @@ function getDirectTextContent(menuItem) {
 async function buildBreadcrumbsFromNavTree(nav, currentUrl) {
   const crumbs = [];
 
-  // Derive homeUrl from current URL (e.g., https://main--site.aem.page/)
-  const urlObj = new URL(currentUrl);
-  const homeUrl = `${urlObj.origin}/`;
+  const homeUrl = document.querySelector('a[href]').href;
 
   let menuItem = Array.from(nav.querySelectorAll('a')).find((a) => a.href === currentUrl);
   if (menuItem) {

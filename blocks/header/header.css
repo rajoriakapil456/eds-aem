@@ -195,13 +195,13 @@ header nav .nav-sections ul > li > ul > li {
   }
 
   header nav .nav-sections .nav-drop {
-    position: relative;
+    /* position: relative; */
     padding-right: 16px;
     cursor: pointer;
   }
 
   header nav .nav-sections .nav-drop::after {
-    content: '';
+    /* content: ''; */
     display: inline-block;
     position: absolute;
     top: 0.5em;
@@ -229,27 +229,29 @@ header nav .nav-sections ul > li > ul > li {
 
   header nav .nav-sections .default-content-wrapper > ul > li {
     flex: 0 1 auto;
-    position: relative;
+    /* position: relative; */
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul {
     display: none;
-    position: relative;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li[aria-expanded='true'] > ul {
-    display: block;
+    display: flex;
+    align-self: flex-start;
+    justify-content: flex-start;
     position: absolute;
-    left: -24px;
-    width: 200px;
-    top: 150%;
-    padding: 16px;
+    left: 0;
+    width: 100vw;
+    height: calc(100vh - 64px);
+    top: 64px;
+    padding: 32px;
     background-color: var(--light-color);
     white-space: initial;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul::before {
-    content: '';
+    /* content: ''; */
     position: absolute;
     top: -8px;
     left: 16px;
@@ -297,6 +299,18 @@ header nav .nav-tools .button {
   padding: 0.5em;
   background: none;
   line-height: 0;
+}
+
+header nav .nav-sections .nav-sublevel1 {
+  display: block;
+}
+
+header nav .nav-sections .nav-sublevel1 li {
+  padding: 12px;
+}
+
+header nav .nav-sections .nav-sublevel1 li:hover {
+  background-color: var(--orange);
 }
 
 /* breadcrumbs */

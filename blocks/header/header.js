@@ -204,21 +204,8 @@ export default async function decorate(block) {
       if (navSection.querySelector('ul')) {
         navSection.classList.add('nav-drop');
 
-        navSection.querySelectorAll('ul > li').forEach((li) => {
-          // Get the text, split on '|', and trim whitespace
-          const parts = li.textContent.split('|').map((item) => item.trim());
-          // Create the new nested <ul>
-          const nestedUl = document.createElement('ul');
-          nestedUl.classList.add('nav-sublevel1');
-          // Add each part as a <li> in the nested <ul>
-          parts.forEach((part) => {
-            const nestedLi = document.createElement('li');
-            nestedLi.textContent = part;
-            nestedUl.appendChild(nestedLi);
-          });
-          // Remove original content and append the nested <ul>
-          li.textContent = '';
-          li.appendChild(nestedUl);
+        navSection.querySelectorAll('.nav-drop > ul > li > ul').forEach((item) => {
+          item.classList.add('nav-sublevel1');
         });
       }
       navSection.addEventListener('click', () => {

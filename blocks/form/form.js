@@ -26,11 +26,11 @@ function constructPayload(form) {
   const payload = {};
   [...form.elements].forEach((fe) => {
     if (fe.type === 'checkbox') {
-      if(fe.checked) {
-         payload[fe.id] = 'True';
-        }else{
-          payload[fe.id] = 'False';
-        }
+      if (fe.checked) {
+        payload[fe.id] = 'True';
+      } else {
+        payload[fe.id] = 'False';
+      }
     } else if (fe.id) {
       payload[fe.id] = fe.value;
     }
